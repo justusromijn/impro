@@ -1,0 +1,19 @@
+{
+  "name": "impro",
+  "version": "0.0.0",
+  "description": "Scoreboard for improvisation theatre",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://justusromijn@github.com/justusromijn/impro.git"
+  },
+  "author": "Justus Romijn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/justusromijn/impro/issues"
+  },
+  "homepage": "https://github.com/justusromijn/impro"
+}
