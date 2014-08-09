@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/justusromijn/impro/issues"
   },
-  "homepage": "https://github.com/justusromijn/impro"
+  "homepage": "https://github.com/justusromijn/impro",
+  "dependencies": {
+    "express": "^4.8.2"
+  }
 }
