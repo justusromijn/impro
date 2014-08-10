@@ -2,9 +2,9 @@
   "name": "impro",
   "version": "0.0.0",
   "description": "Scoreboard for improvisation theatre",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/justusromijn/impro",
   "dependencies": {
-    "express": "^4.8.2"
+    "express": "^4.8.2",
+    "ws": "^0.4.32"
   },
   "engines": {
     "node": "0.10.x"
