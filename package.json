@@ -19,6 +19,7 @@
   "homepage": "https://github.com/justusromijn/impro",
   "dependencies": {
     "express": "^4.8.2",
+    "lusca": "^1.0.1",
     "ws": "^0.4.32"
   },
   "engines": {

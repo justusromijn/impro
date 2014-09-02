@@ -6,18 +6,49 @@
 	<title>Impro Scoreboard!</title>
 	<meta name="description" content="100% impro scoreboard">
 	<meta name="author" content="Justus Romijn">
-
-	<link rel="stylesheet" href="/css/main.css?v=1.0">
-
+	<link rel="stylesheet" href="/css/reset.css">
+	<link rel="stylesheet" href="/css/scoreboard.css?v=1.0">
+	<script src="/vendor/jquery-2.1.1.min.js"></script>
 	<!--[if lt IE 9]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 </head>
 
 <body>
-<h1>Scoreboard</h1>
-Score: <span id="score"></span>
+<div class="team home">
+	<h1>THUIS</h1>
+	<div class="information">
+		<h3 class="timer">---</h3>
+		<h3 class="points">0</h3>
+		<h3 class="percentage">100%</h3>
+	</div>
+</div>
+<div class="team away">
+	<h1>UIT</h1>
+	<div class="information">
+		<h3 class="timer">---</h3>
+		<h3 class="points">0</h3>
+		<h3 class="percentage">100%</h3>
+	</div>
+</div>
+<div class="game">
+	<h1>HUIDIG SPEL</h1>
+	<h2 class="active"></h2>
+</div>
+<div class="suggestions">
+	<h1>SUGGESTIES</h1>
+	<div class="active">
 
+	</div>
+</div>
+<div class="modifiers">
+	<div class="penalties">
+
+	</div>
+	<div class="bonuses">
+
+	</div>
+</div>
 
 <script src="/js/scoreboard.js"></script>
 </body>

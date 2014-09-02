@@ -1,0 +1,225 @@
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	background-color: #000000;
+	font: 12px/18px 'Droid Sans','Arial', sans-serif;
+	color: #ffffff;
+}
+
+.hidden {
+	display: none;
+}
+
+.points {
+	height: 100px;
+	padding: 0 5px;
+}
+.time-controls {
+	height: 66px;
+	border-bottom: 5px solid #ffffff;
+	margin-bottom: 29px;
+}
+
+.games, .suggestions {
+	height: calc(50% - 100px);
+}
+
+.time-controls .team {
+	width: 45%;
+	float: left;
+}
+.time-controls .scores {
+	width: 10%;
+	float: left;
+	text-align: center;
+	font-size: 3.5em;
+	line-height: 1em;
+	padding: 10px 0;
+}
+.time-controls .team .timer,
+.time-controls .team .start {
+	float: left;
+	cursor: pointer;
+}
+.time-controls .team-visitor .timer,
+.time-controls .team-visitor .start {
+	float: right;
+}
+.time-controls .team-visitor .timer {
+	text-align: right;
+}
+.time-controls .team > h1 {
+	width: 20%;
+	float: left;
+}
+.time-controls .team-visitor > h1 {
+	text-align: right;
+	float: right;
+}
+
+.time-controls .team > h1,
+.time-controls .timer {
+	font-size: 3em;
+	line-height: 1em;
+	padding: 15px;
+	width: 30%;
+}
+.time-controls .start {
+	font-size: 3em;
+	line-height: 1em;
+	background-color: #336633;
+	padding: 15px;
+}
+.time-controls .start.stop {
+	background-color: #663333;
+}
+.time-controls .time-up .showing {
+	color: #ff3333;
+}
+.time-controls .timer .editing input {
+	display: block;
+	float: left;
+	width: 40px;
+	font-size: 0.7em;
+	background: #000000;
+	color: #ffffff;
+	border: 2px solid #999999;
+}
+.time-controls .timer .editing span {
+	float: left;
+	display: block;
+}
+.time-controls .timer .editing button {
+	background-color: #666666;
+	color: #ffffff;
+	border: none;
+	float: left;
+	display: block;
+	font-size: 0.4em;
+	line-height: 19px;
+	padding: 8px 5px;
+}
+
+
+
+.games .future,
+.games .past,
+.suggestions .future,
+.suggestions .past {
+	width: 33%;
+	float: left;
+	height: 100%;
+	position: relative;
+}
+.games h1,
+.suggestions h1 {
+	margin: 15px;
+	font-size: 1.5em;
+}
+.games .future .add,
+.suggestions .future .add {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+.games .future .add input,
+.suggestions .future .add input {
+	background: transparent;
+	display: block;
+	border: 2px solid #999999;
+	font-size: 1.3em;
+	line-height: 26px;
+	color: #ffffff;
+	margin: 0;
+	border-radius: 3px 0 0 0;
+}
+.games .future .add span,
+.suggestions .future .add span {
+	font-size: 2em;
+	display: block;
+	float: right;
+	background: #999999;
+	line-height: 24px;
+	cursor: pointer;
+	padding: 4px 8px;
+	margin: 0 15px 0 0;
+	border-radius: 0 3px 0 0;
+}
+.games .current,
+.suggestions .current {
+	width: 34%;
+	float: left;
+	height: 100%;
+	position: relative;
+}
+
+.games .game,
+.suggestions .suggestion {
+	display: inline-block;
+	z-index: 10;
+	margin: 5px;
+	padding: 4px 8px;
+	background: #333333;
+	border: 1px solid #999999;
+	border-radius: 3px;
+	cursor: pointer;
+}
+.games .game .delete,
+.suggestions .suggestion .delete {
+	display: inline-block;
+	border-radius: 9px;
+	padding: 3px;
+	background: #993333;
+	margin: 0 0 0 8px;
+	height: 5px;
+	vertical-align: middle;
+	line-height: 5px;
+}
+.games .game-list,
+.suggestions .suggestions-list {
+	position: absolute;
+	top: 40px;
+	left: 10px;
+	right: 10px;
+	bottom: 10px;
+	border: 2px solid #999999;
+	border-radius: 3px;
+}
+.games .game-list.hover,
+.suggestions .suggestions-list.hover {
+
+}
+.games .current .game,
+.suggestions .current .suggestion {
+	background: #336633;
+}
+.games .past .game,
+.suggestions .past .suggestion {
+	color: #666666;
+}
+
+.points .bonuses,
+.points .penalties {
+	float: left;
+	width: 50%;
+}
+.points .bonus,
+.points .penalty {
+	float: left;
+	margin: 5px;
+	border-radius: 3px;
+	overflow: hidden;
+	cursor: pointer;
+}
+.points .penalty {
+	float: right;
+}
+.points .bonus img,
+.points .penalty img {
+	display: block;
+}
+.points .penalty {
+	float: right;
+}
+
