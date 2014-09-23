@@ -3,6 +3,20 @@ var express = require('express'),
     app = express(),
     wss = new WebSocketServer({port: 8080}),
     clients = [],
+    scoreboard = null,
+    juror = null,
+    currentGame = {
+        games: [],
+        suggestions: [],
+        homeTeam: {
+            points: 0,
+            time: 0
+        },
+        awayTeam: {
+            points: 0,
+            time: 0
+        }
+    },
     lusca = require('lusca');
 
 // SECURITY
@@ -19,6 +33,7 @@ app.use("/css", express.static(__dirname + '/css'));
 app.use("/vendor", express.static(__dirname + '/vendor'));
 app.use("/js", express.static(__dirname + '/js'));
 app.use("/images", express.static(__dirname + '/images'));
+app.use("/fonts", express.static(__dirname + '/fonts'));
 
 app.get('/', function(req, res){
     res.sendfile('views/index.html');
@@ -26,8 +41,8 @@ app.get('/', function(req, res){
 app.get('/scoreboard', function(req, res){
     res.sendfile('views/scoreboard.html');
 });
-app.get('/control', function(req, res){
-    res.sendfile('views/control.html');
+app.get('/juror', function(req, res){
+    res.sendfile('views/juror.html');
 });
 
 app.listen(process.env.PORT || 5000);
@@ -45,57 +60,39 @@ wss.on('connection', function(ws) {
         if (message.clientType){
             console.log('new actor, clienttype: %s', message.clientType);
             client.clientType = message.clientType;
-        } else {
-            updateScoreboard(message);
+            if (client.clientType === 'juror' && !juror){
+                juror = client;
+                // throw all game data to the client
+                client.socket.send(JSON.stringify({ currentGame: currentGame}));
+            } else if (client.clientType === 'scoreboard' && !scoreboard){
+                scoreboard = client;
+            }
 
-//            switch (message.action){
-//
-//                case 'updateScore':
-//                    console.log('update Score --- team: ' + message.team + ', score: ' + message.score);
-//                    break;
-//                case 'updateTime':
-//                    console.log('update Time --- team: ' + message.team + ', time: ' + message.time);
-//                    break;
-//
-//                case 'timer':
-//                    console.log('Timer action --- team: ' + message.team + ', type: ' + message.type);
-//                    break;
-//
-//                case 'game':
-//                    console.log('Active game --- : ' + message.label);
-//                    break;
-//
-//                case 'suggestion':
-//                    console.log('Active game --- : ' + message.label);
-//                    break;
-//
-//                case 'gameDone':
-//                    console.log('No active games');
-//                    break;
-//
-//                case 'suggestionDone':
-//                    console.log('No active suggestions');
-//                    break;
-//            }
+        } else if (juror === client) {
+            if (message.newGame){
+                currentGame.games.push(message.newGame);
+            } else if (message.removeGame){
+                removeA(currentGame.games, message.removeGame);
+            } else if (message.newSuggestion){
+                currentGame.suggestions.push(message.newSuggestion);
+            } else if (message.removeSuggestion){
+                removeA(currentGame.suggestions, message.removeSuggestion);
+            }
         }
 
         ws.on('close', function(){
-            console.log('closing a connection...');
             clients.splice(position, 1);
+            if (juror === client){
+                console.log('jury logged out...');
+                juror = null;
+            } else {
+                console.log('scoreboard logged out...');
+                scoreboard = null;
+            }
         });
     });
 });
 
-function updateScoreboard(message){
-    var i;
-
-    for (i=0; i < clients.length; i++){
-        console.log(clients[i].clientType);
-        if (clients[i].clientType === 'scoreboard'){
-            clients[i].socket.send(JSON.stringify(message));
-        }
-    }
-}
 // TODO: save state serverside
 // Maybe persist state to JSON files, to avoid losing all data when something goes wrong...
 //var fs = require('fs');
@@ -106,3 +103,14 @@ function updateScoreboard(message){
 //}
 //
 //setTimeout(saveState, 10000);
+
+function removeA(arr) {
+    var what, a = arguments, L = a.length, ax;
+    while (L > 1 && arr.length) {
+        what = a[--L];
+        while ((ax= arr.indexOf(what)) !== -1) {
+            arr.splice(ax, 1);
+        }
+    }
+    return arr;
+}
