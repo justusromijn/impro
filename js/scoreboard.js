@@ -1,5 +1,5 @@
 // open websocket
-var host = location.origin.replace(/^http/, 'ws'),
+var host = location.origin.replace(/^http/, 'wss'),
     socket = new WebSocket(host);
 
 socket.onopen = function(){
