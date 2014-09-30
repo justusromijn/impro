@@ -1,13 +1,26 @@
-console.log('NODE STARTING, YAY!!!');
-var express = require('express'),
+var WebSocketServer = require("ws").Server;
+var http = require("http");
+var express = require("express");
+var app = express();
+var port = process.env.PORT || 5000;
 
-    rand = function() { return Math.random().toString(36).substr(2) },
+app.use(express.static(__dirname + "/"));
+
+var server = http.createServer(app);
+server.listen(port);
+
+console.log("http server listening on %d", port);
+
+var wss = new WebSocketServer({server: server});
+console.log("websocket server created");
+
+
+console.log('NODE STARTING, YAY!!!');
+
+var rand = function() { return Math.random().toString(36).substr(2) },
     token = function() { return rand() + rand()}, // to make it longer
-    WebSocketServer = require('ws').Server,
     bodyParser = require('body-parser'),
     fs = require('fs'),
-    app = express(),
-    wss = new WebSocketServer({port: 5001}),
     clients = [],
     scoreboard = [],
     juror = null,
@@ -159,7 +172,7 @@ app.get('/services/time', function(req, res){
     });
 });
 
-app.listen(process.env.PORT || 5000);
+//app.listen(process.env.PORT || 5000);
 
 
 // SOCKETS
