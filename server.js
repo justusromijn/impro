@@ -1,12 +1,13 @@
 console.log('NODE STARTING, YAY!!!');
 var express = require('express'),
+
     rand = function() { return Math.random().toString(36).substr(2) },
     token = function() { return rand() + rand()}, // to make it longer
     WebSocketServer = require('ws').Server,
     bodyParser = require('body-parser'),
     fs = require('fs'),
     app = express(),
-    wss = new WebSocketServer({port: 8080}),
+    wss = new WebSocketServer({server: app, port: 8080}),
     clients = [],
     scoreboard = [],
     juror = null,
