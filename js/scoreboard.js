@@ -1,5 +1,6 @@
 // open websocket
-var socket = new WebSocket("ws://localhost:8080");
+var host = location.origin.replace(/^http/, 'ws'),
+    socket = new WebSocket(host);
 
 socket.onopen = function(){
     var message = {
