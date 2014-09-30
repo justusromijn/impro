@@ -1,5 +1,5 @@
 // open websocket
-var host = location.origin.replace(/^http/, 'ws'),
+var host = location.origin.replace(/^http/, 'ws').replace(/5000/, '5001'),
     socket = new WebSocket(host),
     games = [],
     timerInterval = null;
