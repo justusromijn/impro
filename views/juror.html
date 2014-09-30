@@ -20,69 +20,85 @@
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="padding-top: 8px;">
 	<div class="container">
-		<button type="button" data-show="team-1" class="btn btn-primary">Team 1</button>
-		<button type="button" data-show="team-2" class="btn btn-primary">Team 2</button>
+		<button type="button" data-page="rounds" class="btn btn-primary">Programma</button>
 
 		<div class="pull-right">
-			<button type="button" data-toggler="btn-warning" data-text="Splash actief" class="btn btn-default">Toon splash</button>
-			<button type="button" data-show="games" class="btn btn-default">Spellen</button>
-			<button type="button" data-show="suggestions" class="btn btn-default">Suggesties</button>
+			<button type="button" data-page="settings" class="btn btn-default">Instellingen</button>
+			<button type="button" data-page="games" class="btn btn-default">Spellen</button>
+			<button type="button" data-page="suggestions" class="btn btn-default">Suggesties</button>
 		</div>
 	</div>
 </nav>
 <div id="working-space" class="container" style="padding-top: 60px">
-	<div id="team-1" class="panel panel-default">
+	<div id="rounds" class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title">Team 1</h3>
+			<h3 class="panel-title">Programma</h3>
 		</div>
 		<div class="panel-body">
-			<form class="form-inline" id="team-one" role="form">
-				<div class="form-group">
-					<label class="sr-only" for="team-one-name">Tijd</label>
-					<input type="text" class="form-control" id="team-one-name" placeholder="Teamnaam...">
+
+			<ul id="halfs-tabs" class="nav nav-tabs nav-justified" role="tablist">
+				<li data-half="first"  class="active">
+					<a data-show="first-half-rounds" data-hide="second-half-rounds" href="#">Eerste helft</a>
+				</li>
+				<li data-half="second" >
+					<a data-show="second-half-rounds" data-hide="first-half-rounds" href="#">Tweede helft</a>
+				</li>
+			</ul>
+
+
+			<div id="game-rounds">
+				<div id="first-half-rounds">
+					<div class="time-left panel panel-default">
+						<div class="panel-heading"><h4>Resterende tijd</h4></div>
+						<div class="panel-body fluid-container">
+							<div class="col-md-6"><h3><small>thuis:</small> <span id="first-half-home"><span class="minutes"></span>:<span class="seconds"></span></span></h5></div>
+							<div class="col-md-6"><h3><small>Uit:</small> <span id="first-half-away"><span class="minutes"></span>:<span class="seconds"></span></span></h5></div>
+						</div>
+					</div>
 				</div>
-				<div class="form-group">
-					<label class="sr-only" for="team-one-time">Tijd</label>
-					<input type="text" class="form-control" id="team-one-time" placeholder="Minuten...">
+				<div id="second-half-rounds" class="hidden">
+					<div class="time-left panel panel-default">
+						<div class="panel-heading"><h4>Resterende tijd</h4></div>
+						<div class="panel-body fluid-container">
+							<div class="col-md-6"><h5><small>thuis:</small> <span id="second-half-home"><span class="minutes"></span>:<span class="seconds"></span></span></h5></div>
+							<div class="col-md-6"><h5><small>Uit:</small> <span id="second-half-away"><span class="minutes"></span>:<span class="seconds"></span></span></h5></div>
+						</div>
+					</div>
 				</div>
-				<button type="submit" class="btn btn-default">Opslaan</button>
-			</form>
-			<button id="new-round-button" class="btn btn-primary">Nieuwe ronde</button>
-			<div id="new-round" class="panel-body hidden">
-				<form class="inline-form" id="round-form" role="form">
-					<div class="form-group">
-						<h3>Spelvorm</h3>
-						<select class="form-control">
-							<option>---</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<h3>Suggesties</h3>
-						<label class="form-control">
-							<input type="checkbox" id="inlineCheckbox1" value="option1"> 1
-						</label>
-						<label class="form-control">
-							<input type="checkbox" id="inlineCheckbox2" value="option2"> 2
-						</label>
-						<label class="form-control">
-							<input type="checkbox" id="inlineCheckbox3" value="option3"> 3
-						</label>
-					</div>
-					<div class="form-group">
-						<button type="button" class="btn btn-success">Start ronde</button>
-					</div>
-				</form>
+			</div>
+
+			<button data-show="new-round-panel" id="new-round-button" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Speelronde toevoegen</button>
+			<div id="new-round-panel" class="panel panel-default hidden">
+				<div id="new-round" class="panel-body">
+					<form class="inline-form" id="round-form" role="form">
+						<div class="form-group">
+							<h3>Team</h3>
+							<select id="team-select" class="form-control">
+								<option value="home">Thuis</option>
+								<option value="away">Uit</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<h3>Spelvorm</h3>
+							<select id="games-select" class="form-control">
+							</select>
+						</div>
+						<div class="form-group">
+							<h3>Suggesties</h3>
+							<div id="suggestions-checkboxes">
+							</div>
+						</div>
+						<div class="form-group">
+							<button type="button" data-hide="new-round-panel" id="add-new-round" data-team="home" class="btn btn-success">Opslaan</button>
+							<button type="submit" data-hide="new-round-panel" class="btn btn-danger">Annuleren</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
+
 	</div>
-	<div id="team-2" class="panel panel-default hidden">
-		<div class="panel-heading">
-			<h3 class="panel-title">Team 2</h3>
-		</div>
-		<div class="panel-body">
-			...
-		</div>
-	</div>
+
 	<div id="games" class="panel panel-default hidden">
 		<div class="panel-heading">
 			<h3 class="panel-title">Spellen</h3>
@@ -90,15 +106,23 @@
 		<div class="panel-body">
 			<form class="form-inline" id="games-form" role="form">
 				<div class="form-group">
-					<label class="sr-only" for="games-new">Spellen</label>
 					<input type="text" class="form-control" id="games-new" placeholder="Voer een spel in">
 				</div>
 				<button type="submit" class="btn btn-default">Opslaan</button>
+				<button type="submit" class="btn btn-error">Annuleren</button>
 			</form>
-			<table id="games-list" class="table">
+			<table id="games-list" class="table table-condensed table-striped">
+				<thead>
+					<tr>
+						<th>Spellen</th>
+						<th class="col-sm-2">Acties</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
 			</table>
 		</div>
 	</div>
+
 	<div id="suggestions" class="panel panel-default hidden">
 		<div class="panel-heading">
 			<h3 class="panel-title">Suggesties</h3>
@@ -106,13 +130,52 @@
 		<div class="panel-body">
 			<form class="form-inline" id="suggestions-form" role="form">
 				<div class="form-group">
-					<label class="sr-only" for="suggestions-new">Spellen</label>
-					<input type="text" class="form-control" id="suggestions-new" placeholder="Voer een spel in">
+					<input type="text" class="form-control" id="suggestions-new" placeholder="Voer een suggestie in">
 				</div>
 				<button type="submit" class="btn btn-default">Opslaan</button>
+				<button type="submit" class="btn btn-error">Annuleren</button>
 			</form>
-			<table id="suggestions-list" class="table">
+			<table id="suggestions-list" class="table table-condensed table-striped">
+				<thead>
+				<tr>
+					<th>Suggesties</th>
+					<th class="col-sm-2">Acties</th>
+				</tr>
+				</thead>
+				<tbody></tbody>
 			</table>
+		</div>
+	</div>
+
+	<div id="settings" class="panel panel-default hidden">
+		<div class="panel-heading">
+			<h3 class="panel-title">Instellingen</h3>
+		</div>
+		<div class="panel-body">
+			<form id="settings-form" role="form">
+				<h3>Speeltijd</h3>
+				<div class="form-group">
+					<label for="first-half">Tijd eerste helft</label>
+					<input type="number" class="form-control" id="first-half" placeholder="Speeltijd eerste helft (minuten)">
+				</div>
+				<div class="form-group">
+					<label for="first-half">Tijd tweede helft</label>
+					<input type="number" class="form-control" id="second-half" placeholder="Speeltijd tweede helft (minuten)">
+				</div>
+				<h3>Teamnamen</h3>
+				<div class="form-group">
+					<label for="first-half">Teamnaam thuis</label>
+					<input type="text" class="form-control" id="team-home" placeholder="Nederland">
+				</div>
+				<div class="form-group">
+					<label for="first-half">Teamnaam uit</label>
+					<input type="text" class="form-control" id="team-away" placeholder="Belgie">
+				</div>
+				<div class="form-group">
+					<button id="save-settings" class="btn btn-success">Opslaan</button>
+				</div>
+			</form>
+			<button id="reset-game" class="btn btn-danger">Reset alles</button>
 		</div>
 	</div>
 </div>
