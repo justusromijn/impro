@@ -1,3 +1,4 @@
+console.log('NODE STARTING, YAY!!!');
 var express = require('express'),
     rand = function() { return Math.random().toString(36).substr(2) },
     token = function() { return rand() + rand()}, // to make it longer
@@ -162,7 +163,7 @@ app.listen(process.env.PORT || 5000);
 
 // SOCKETS
 wss.on('connection', function(ws) {
-
+    console.log('HOUSTON: we have got contact');
     var clientID = token();
     var client = {clientID: clientID, socket: ws, clientType: null};
     ws.on('message', function(message) {
