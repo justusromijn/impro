@@ -189,7 +189,7 @@ wss.on('connection', function(ws) {
             console.log('ping...');
             ws.pingssent++;
         }
-    }, 60 * 1000);
+    }, 30 * 1000);
 
     ws.on("pong", function() {    // we received a pong from the client.
         console.log('pong...');
