@@ -14,9 +14,6 @@ console.log("http server listening on %d", port);
 var wss = new WebSocketServer({server: server});
 console.log("websocket server created");
 
-
-console.log('NODE STARTING, YAY!!!');
-
 var rand = function() { return Math.random().toString(36).substr(2) },
     token = function() { return rand() + rand()}, // to make it longer
     bodyParser = require('body-parser'),
@@ -174,12 +171,31 @@ app.get('/services/time', function(req, res){
     });
 });
 
-//app.listen(process.env.PORT || 5000);
-
-
 // SOCKETS
 wss.on('connection', function(ws) {
     console.log('HOUSTON: we have got contact');
+    ws.pingssent = 0;
+    ws.ping();
+
+    var pingInterval = setInterval(function() {
+
+        if (ws.pingssent >= 2)   // how many missed pings you will tolerate before assuming connection broken.
+        {
+            ws.close();
+        }
+        else
+        {
+            ws.ping();
+            console.log('ping...');
+            ws.pingssent++;
+        }
+    }, 60 * 1000);
+
+    ws.on("pong", function() {    // we received a pong from the client.
+        console.log('pong...');
+        ws.pingssent = 0;    // reset ping counter.
+    });
+
     var clientID = token();
     var client = {clientID: clientID, socket: ws, clientType: null};
     ws.on('message', function(message) {
