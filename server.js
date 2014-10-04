@@ -301,6 +301,8 @@ wss.on('connection', function(ws) {
         }
 
         ws.on('close', function(){
+            clearInterval(pingInterval);
+
             if (juror === client){
                 console.log('jury logged out...');
                 juror = null;
