@@ -71,10 +71,12 @@ $('document').ready(function(){
             }
         }));
         event.preventDefault();
+        location.reload();
     });
     $('#reset-game').on('click', function(event){
         $.ajax('/services/reset').done(function(response){
             alert('Alles is leeggemaakt.');
+            location.reload();
         });
     });
 
@@ -152,7 +154,7 @@ $('document').ready(function(){
 
 function addRound(round){
     var suggestions = round.suggestions.join(', '),
-        team = round.team === 'home' ? 'Thuis' : 'Uit',
+        team = round.team === 'home' ? 'Thuis' : 'Uit',//TODO: use team LABELS
         half = round.half,
         points = 0,
         id = round.id;
@@ -302,14 +304,12 @@ function startTimer(teamParam, half, callback){
 
     timerInterval = setInterval(function(){
         if (parseInt(seconds.text()) < 1){
-            seconds.text("59");
-            if (parseInt(minutes.text()) < 1){
-                alert('TIJD OP!');
 
+            if (parseInt(minutes.text()) < 1){
                 stopTimer();
                 callback();
-
             } else {
+                seconds.text("59");
                 minutes.text(parseInt(minutes.text()) - 1);
             }
         } else {

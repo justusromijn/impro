@@ -55,6 +55,8 @@ var rand = function() { return Math.random().toString(36).substr(2) },
 
     if (buf.length ){
         currentGame = JSON.parse(buf);
+    } else {
+
     }
 
 // MIDDLEWARE
@@ -357,6 +359,12 @@ function getTime(team, half){
         minutes = Math.floor(((currentGame.firstHalf + currentGame.secondHalf) - (currentGame[team].firstHalf + currentGame[team].secondHalf)) / 60);
         seconds = ((currentGame.firstHalf + currentGame.secondHalf) - (currentGame[team].firstHalf + currentGame[team].secondHalf)) % 60;
     }
+    if ((seconds + '').length < 2){
+        seconds = '0' + seconds;
+    }
+    if ((minutes + '').length < 2){
+        minutes = '0' + minutes;
+    }
     return minutes + ':' + seconds;
 }
 
@@ -364,7 +372,7 @@ function updateHome(){
     scoreboard.forEach(function(board){
         var max = Math.floor(((currentGame.firstHalf + currentGame.secondHalf)) / 60) * 2;
         var homePlayed = Math.floor(((currentGame.home.firstHalf + currentGame.home.secondHalf)) / 60) * 2;
-        var awayPlayed = Math.floor(((currentGame.home.firstHalf + currentGame.home.secondHalf)) / 60) * 2;
+        var awayPlayed = Math.floor(((currentGame.away.firstHalf + currentGame.away.secondHalf)) / 60) * 2;
 
         board.socket.send(JSON.stringify(
             { gameInit: {
