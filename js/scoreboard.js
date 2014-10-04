@@ -84,35 +84,35 @@ function highlightJuryPoints(point){
 
     switch (point.theme){
         case 'funny':
-            text = 'grappige scene';
+            text = 'Grappig';
             break;
         case 'finish':
-            text = 'sterk einde';
+            text = 'Mooi einde';
             break;
         case 'emotions':
-            text = 'veel emotie';
+            text = 'Emotioneel spel';
             break;
         case 'teamwork':
-            text = 'goede samenwerking';
+            text = 'Goede samenwerking';
             break;
         case 'spectacle':
-            text = 'spectaculair';
+            text = 'Spectaculaire actie';
             break;
 
         case 'rude':
-            text = 'grof taalgebruik';
+            text = 'Nodeloos grof';
             break;
         case 'boring':
-            text = 'saai';
+            text = 'Saai';
             break;
         case 'explanation':
-            text = 'uitleg nodig';
+            text = 'Teveel uitleg';
             break;
         case 'confusing':
-            text = 'verwarrende scene';
+            text = 'Verwarrend';
             break;
         case 'garbage':
-            text = 'ongebruikt item';
+            text = 'Negeren';
             break;
     }
     juryAction.addClass(point.theme);
